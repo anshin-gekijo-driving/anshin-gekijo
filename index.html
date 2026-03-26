@@ -1,15 +1,322 @@
-<div class="instructor-card">
-  <div class="instructor-photo-placeholder">🎭</div>
-  <div class="instructor-name">近藤 惣三</div>
-  <div class="instructor-role">代表インストラクター</div>
-  <p class="instructor-quote">「運転は、もっと自由で楽しいものであるべきだ」</p>
-  <p class="instructor-body">
-    元コメディ劇団俳優という異色の経歴を持つ指導員。大手教習所での7年の経験を経て独立。<br>
-    独自の「エンタメ教習」で、1,000名以上のペーパードライバーの不安を笑顔に変えてきました。
-  </p>
-  <div class="instructor-tags">
-    <span>国家資格保持</span>
-    <span>東京23区対応</span>
-    <span>褒めて伸ばす派</span>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あんしん劇場ドライビング | ペーパードライバー講習 東京23区</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;color:#1A1A1A;background:#fff;}
+a{color:inherit;text-decoration:none;}
+
+/* ヘッダー */
+.header{background:#1A1A1A;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.header .logo{color:#fff;font-size:14px;font-weight:700;letter-spacing:0.05em;}
+.header .cta-btn{background:#C9522A;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:700;}
+
+/* ヒーロー */
+.hero{background:#1A1A1A;padding:60px 24px 50px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'🎭';position:absolute;font-size:200px;opacity:0.04;top:50%;left:50%;transform:translate(-50%,-50%);}
+.hero .eyebrow{display:inline-block;background:#C9522A;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.2em;padding:6px 16px;border-radius:4px;margin-bottom:20px;}
+.hero h1{font-size:32px;font-weight:900;color:#fff;line-height:1.4;margin-bottom:16px;}
+.hero h1 em{font-style:normal;color:#F08060;}
+.hero p{font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:32px;line-height:1.7;}
+.hero .hero-cta{display:inline-block;background:#C9522A;color:#fff;padding:16px 32px;border-radius:40px;font-size:15px;font-weight:700;letter-spacing:0.05em;}
+.hero .hero-sub{margin-top:12px;font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;}
+
+/* セクション共通 */
+.section{padding:56px 24px;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:0.2em;color:#C9522A;margin-bottom:10px;}
+.section-title{font-size:24px;font-weight:900;line-height:1.5;margin-bottom:8px;}
+.section-sub{font-size:14px;color:#777;line-height:1.7;margin-bottom:32px;}
+
+/* 悩みセクション */
+.worries{background:#F8F5F0;}
+.worry-list{display:flex;flex-direction:column;gap:12px;}
+.worry-item{background:#fff;border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px;font-size:14px;line-height:1.5;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.worry-item .wi{font-size:22px;flex-shrink:0;}
+
+/* 3つの理由 */
+.reasons{background:#fff;}
+.reason-cards{display:flex;flex-direction:column;gap:20px;}
+.reason-card{border-radius:16px;padding:24px;position:relative;overflow:hidden;}
+.reason-card.r1{background:#1A1A1A;color:#fff;}
+.reason-card.r2{background:#FAF6F0;border:2px solid #EDE5D8;}
+.reason-card.r3{background:#F0F5F0;border:2px solid #D5E5D5;}
+.reason-card .rnum{font-size:48px;font-weight:900;opacity:0.08;position:absolute;right:16px;top:8px;line-height:1;}
+.reason-card .rtag{font-size:10px;font-weight:700;letter-spacing:0.15em;margin-bottom:10px;}
+.reason-card.r1 .rtag{color:#F08060;}
+.reason-card.r2 .rtag{color:#C9952E;}
+.reason-card.r3 .rtag{color:#7A9E7E;}
+.reason-card h3{font-size:17px;font-weight:900;line-height:1.5;margin-bottom:10px;}
+.reason-card.r1 h3{color:#fff;}
+.reason-card p{font-size:13px;line-height:1.8;}
+.reason-card.r1 p{color:rgba(255,255,255,0.65);}
+.reason-card.r2 p,.reason-card.r3 p{color:#555;}
+
+/* 口コミ */
+.reviews{background:#F8F5F0;}
+.review-cards{display:flex;flex-direction:column;gap:16px;}
+.review-card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.review-card .stars{color:#C9952E;font-size:14px;letter-spacing:2px;margin-bottom:10px;}
+.review-card .rtext{font-size:14px;line-height:1.85;color:#333;margin-bottom:14px;}
+.review-card .rtext em{font-style:normal;color:#C9522A;font-weight:700;}
+.review-card .rperson{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid #F0EDE8;}
+.review-card .av{width:36px;height:36px;background:#C9952E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.review-card .rname{font-size:12px;font-weight:700;color:#1A1A1A;}
+.review-card .rmeta{font-size:11px;color:#AAA;}
+
+/* 料金 */
+.pricing{background:#fff;}
+.campaign-badge{background:#C9522A;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.1em;padding:8px 20px;border-radius:4px;display:inline-block;margin-bottom:24px;}
+.price-cards{display:flex;flex-direction:column;gap:12px;}
+.price-card{border-radius:14px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;}
+.price-card.featured{background:#1A1A1A;}
+.price-card.normal{background:#FAF6F0;border:1.5px solid #EDE5D8;}
+.price-card .pc-left .pname{font-size:14px;font-weight:700;}
+.price-card.featured .pname{color:rgba(255,255,255,0.6);font-weight:400;font-size:12px;}
+.price-card .pc-left .psub{font-size:11px;color:#AAA;margin-top:3px;}
+.price-card .pc-right{text-align:right;}
+.price-card .original{font-size:11px;color:#AAA;text-decoration:line-through;}
+.price-card .price{font-size:22px;font-weight:900;color:#1A1A1A;}
+.price-card.featured .price{color:#F08060;}
+.popular-badge{background:#C9522A;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;}
+.price-note{margin-top:20px;background:#F8F5F0;border-radius:12px;padding:16px;font-size:12px;color:#777;line-height:1.8;}
+.price-note strong{color:#1A1A1A;}
+
+/* ステップ */
+.steps{background:#F8F5F0;}
+.step-list{display:flex;flex-direction:column;gap:0;}
+.step-item{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid #EDE5D8;}
+.step-item:last-child{border-bottom:none;}
+.step-num{width:36px;height:36px;background:#C9522A;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
+.step-content h4{font-size:15px;font-weight:700;margin-bottom:6px;}
+.step-content p{font-size:13px;color:#777;line-height:1.7;}
+
+/* FAQ */
+.faq{background:#fff;}
+.faq-list{display:flex;flex-direction:column;gap:12px;}
+.faq-item{border-radius:12px;overflow:hidden;border:1.5px solid #EDE5D8;}
+.faq-q{background:#FAF6F0;padding:16px 18px;font-size:14px;font-weight:700;display:flex;gap:10px;}
+.faq-q .ql{color:#C9522A;flex-shrink:0;}
+.faq-a{padding:16px 18px;font-size:13px;color:#555;line-height:1.8;display:flex;gap:10px;}
+.faq-a .al{color:#7A9E7E;flex-shrink:0;font-weight:700;}
+
+/* インストラクター */
+.instructor{background:#1A1A1A;padding:56px 24px;}
+.instructor .section-label{color:#F08060;}
+.instructor .section-title{color:#fff;}
+.instructor .section-sub{color:rgba(255,255,255,0.5);}
+.instructor-card{background:rgba(255,255,255,0.06);border-radius:20px;padding:28px 24px;margin-top:8px;}
+.instructor-photo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #C9522A;display:block;margin:0 auto 20px;}
+.instructor-photo-placeholder{width:120px;height:120px;border-radius:50%;background:#C9522A;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto 20px;}
+.instructor-name{text-align:center;font-size:18px;font-weight:900;color:#fff;margin-bottom:4px;}
+.instructor-role{text-align:center;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.15em;margin-bottom:20px;}
+.instructor-quote{font-family:'Hiragino Mincho Pro','Georgia',serif;font-size:15px;color:rgba(255,255,255,0.85);line-height:1.9;text-align:center;margin-bottom:20px;font-style:italic;}
+.instructor-body{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.9;margin-bottom:20px;}
+.instructor-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px;}
+.instructor-tags span{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:12px;padding:6px 12px;border-radius:20px;}
+.ai-note{text-align:center;font-size:11px;color:rgba(255,255,255,0.3);margin-top:8px;}
+
+/* CTA最終 */
+.final-cta{background:#C9522A;padding:56px 24px;text-align:center;}
+.final-cta h2{font-size:26px;font-weight:900;color:#fff;line-height:1.5;margin-bottom:12px;}
+.final-cta p{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:32px;}
+.final-cta .cta-main{display:inline-block;background:#fff;color:#C9522A;padding:18px 36px;border-radius:40px;font-size:16px;font-weight:900;margin-bottom:12px;}
+.final-cta .cta-sub{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.08em;}
+
+/* フッター */
+.footer{background:#111;padding:32px 24px;text-align:center;}
+.footer p{font-size:12px;color:#555;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header class="header">
+  <div class="logo">🎭 あんしん劇場ドライビング</div>
+  <a href="mailto:anshin.gekijo.driving@gmail.com" class="cta-btn">無料相談</a>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="eyebrow">🎭 元コメディ劇団俳優のプロ指導員</div>
+  <h1>運転の恐怖を、<br><em>笑顔に変える。</em></h1>
+  <p>日本一ハードルの低い、ペーパードライバー講習<br>東京23区 出張対応 ／ 2時間 7,700円〜</p>
+  <a href="mailto:anshin.gekijo.driving@gmail.com" class="hero-cta">📩 まずは無料で相談してみる</a>
+  <div class="hero-sub">無理な勧誘は一切ありません</div>
+</section>
+
+<!-- 悩み -->
+<section class="section worries">
+  <div class="section-label">こんな方へ</div>
+  <div class="section-title">こんなお悩み、<br>ありませんか？</div>
+  <div class="section-sub">一つでも当てはまったら、ここはあなたのための場所です。</div>
+  <div class="worry-list">
+    <div class="worry-item"><span class="wi">😔</span>免許を取ってから、ほとんど運転していない…</div>
+    <div class="worry-item"><span class="wi">😰</span>教習所の高圧的な指導がトラウマになっている…</div>
+    <div class="worry-item"><span class="wi">😤</span>家族に教えてもらおうとしたが、喧嘩になった…</div>
+    <div class="worry-item"><span class="wi">🚗</span>子どもの送迎や買い物で、本当は車を使いたい…</div>
+    <div class="worry-item"><span class="wi">😞</span>「自分は運転に向いてない」と諦めかけている…</div>
+    <div class="worry-item"><span class="wi">😟</span>また怖い思いをするのでは…と不安で踏み出せない</div>
   </div>
-</div>
+</section>
+
+<!-- 3つの理由 -->
+<section class="section reasons">
+  <div class="section-label">選ばれる理由</div>
+  <div class="section-title">あんしん劇場が<br>リピートされる3つの理由</div>
+  <div class="section-sub">プロの指導 × エンタメで、運転が楽しくなる</div>
+  <div class="reason-cards">
+    <div class="reason-card r1">
+      <div class="rnum">1</div>
+      <div class="rtag">REASON 01</div>
+      <h3>脱・緊張！笑いと共感の<br>エンタメ教習</h3>
+      <p>元コメディ劇団俳優の話術で、ガチガチの緊張をほぐします。できないことを叱るのではなく、できている部分を見つけて「褒めて伸ばす」のが私のスタイルです。</p>
+    </div>
+    <div class="reason-card r2">
+      <div class="rnum">2</div>
+      <div class="rtag">REASON 02</div>
+      <h3>国家資格保持<br>「本物」の安心感</h3>
+      <p>公安委員会認定の指定自動車教習指導員として、数千人を送り出したプロの視点で、あなたの癖を一瞬で見抜き、安全で正しい技術を伝授します。</p>
+    </div>
+    <div class="reason-card r3">
+      <div class="rnum">3</div>
+      <div class="rtag">REASON 03</div>
+      <h3>明朗会計<br>嬉しい価格と柔軟なプラン</h3>
+      <p>2時間7,700円〜の業界最安値クラス。ご要望に応じてコースを組み立てる「オーダーメイドプラン」も人気。出張費無料！補助ブレーキも完備しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 口コミ -->
+<section class="section reviews">
+  <div class="section-label">お客様の声</div>
+  <div class="section-title">先に恐怖を乗り越えた、<br>先輩たちの声</div>
+  <div class="section-sub">実際に受講されたお客様からのご感想です</div>
+  <div class="review-cards">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="rtext">15年ぶりの運転で震えていましたが、先生が<em>「座席を合わせただけで100点満点！」</em>と褒めてくださり、一気に緊張が解けました。お喋りしながら楽しく練習していたら、いつの間にか近所のスーパーまで往復できていて自分でも驚きです！</div>
+      <div class="rperson"><div class="av">👩</div><div><div class="rname">30代・女性</div><div class="rmeta">15年のブランクを克服</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="rtext">「向いてない」と言われ続け自信ゼロでしたが、ここは「日本一ハードルが低い」の言葉通りでした。小さな成功を全部褒めてくれるので<em>自己肯定感が爆上がり</em>。あんなに嫌いだった運転が、今では一番の楽しみです！</div>
+      <div class="rperson"><div class="av">👨</div><div><div class="rname">20代・男性</div><div class="rmeta">運転への苦手意識が消えた</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="rtext">怖い先生だったらどうしよう…という不安は、<em>会って数秒で消えました（笑）</em>。世間話をしながらリラックスして受講でき、苦手な駐車もユーモアを交えて教えてくれたおかげで克服。今では雨の日の送迎も鼻歌まじりでこなせています。</div>
+      <div class="rperson"><div class="av">👩</div><div><div class="rname">40代・主婦</div><div class="rmeta">バック駐車も克服！</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 料金 -->
+<section class="section pricing">
+  <div class="section-label">料金・プラン</div>
+  <div class="section-title">まずはお試しから。<br>ご予算と目標に合わせてお選びください</div>
+  <div class="campaign-badge">🎉 今だけ！キャンペーン実施中</div>
+  <div class="price-cards">
+    <div class="price-card featured">
+      <div class="pc-left">
+        <div class="pname">🌟 さくっと ／ 2時間コース<span class="popular-badge">人気No.1</span></div>
+        <div class="psub" style="color:rgba(255,255,255,0.3)">まずはお試しに最適</div>
+      </div>
+      <div class="pc-right">
+        <div class="original" style="color:rgba(255,255,255,0.3)">通常 11,000円</div>
+        <div class="price">¥7,700</div>
+      </div>
+    </div>
+    <div class="price-card normal">
+      <div class="pc-left">
+        <div class="pname">しっかり ／ 3時間コース</div>
+        <div class="psub">高速・駐車も対応</div>
+      </div>
+      <div class="pc-right">
+        <div class="original">通常 16,500円</div>
+        <div class="price">¥11,000</div>
+      </div>
+    </div>
+    <div class="price-card normal">
+      <div class="pc-left">
+        <div class="pname">きっちり ／ 6時間コース</div>
+        <div class="psub">がっつり克服したい方に</div>
+      </div>
+      <div class="pc-right">
+        <div class="original">通常 33,000円</div>
+        <div class="price">¥21,000</div>
+      </div>
+    </div>
+  </div>
+  <div class="price-note">
+    <strong>オーダーメイドプランもあります！</strong><br>
+    出張費無料・補助ブレーキ完備・同乗者OK・教習シェアOK・カーシェアOK
+  </div>
+</section>
+
+<!-- ステップ -->
+<section class="section steps">
+  <div class="section-label">お申し込みの流れ</div>
+  <div class="section-title">お申し込みは<br>簡単3ステップ</div>
+  <div class="section-sub">まずは気軽にご連絡ください。無理な勧誘は一切ありません。</div>
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>📩 お問い合わせ</h4>
+        <p>メールで、ご希望の日時や練習したい内容をお知らせください。どんな些細な不安も、遠慮なくお聞かせください。</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>💬 プラン相談</h4>
+        <p>メールのやり取りで、あなたに最適なプランを一緒に考えます。「何から始めればいいかわからない」という方も大歓迎！</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>🚗 講習当日・開演！</h4>
+        <p>ご指定の場所へ伺います。まずは車内でリラックスしながらお話しましょう。準備ができたら、いよいよ開演です！</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq">
+  <div class="section-label">よくある質問</div>
+  <div class="section-title">受講前の不安を、<br>まるごと解消します</div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q"><span class="ql">Q</span>本当に怒られませんか？</div>
+      <div class="faq-a"><span class="al">A</span>はい、絶対に怒りません！むしろ「褒めて伸ばす」がモットーです。どんなに上手くいかなくても、できている部分を必ず見つけてお伝えします。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="ql">Q</span>自分の車で練習できますか？</div>
+      <div class="faq-a"><span class="al">A</span>はい、マイカーでの教習が基本です。補助ブレーキをご用意しますのでご安心ください。カーシェアやレンタカーでも対応可能です。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="ql">Q</span>家族や友人も同乗できますか？</div>
+      <div class="faq-a"><span class="al">A</span>はい、可能です！お子様を乗せての練習もOKです。「前半は旦那様、後半は奥様」という教習シェアも大歓迎です。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="ql">Q</span>キャンセルはできますか？</div>
+      <div class="faq-a"><span class="al">A</span>前日までにご連絡いただければ、無料でキャンセル・日程変更が可能です。急な体調不良なども、お気軽にご連絡ください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="ql">Q</span>支払い方法は何がありますか？</div>
+      <div class="faq-a"><span class="al">A</span>現金、銀行振込、PayPayに対応しています。当日の現金払いでも問題ありません。</div>
+    </div>
+  </div>
+</section>
+
+<!-- インストラクター -->
+<section class="instructor">
+  <div class="section-label">インストラクター紹介</div>
+  <div class="section-title" style="color:#fff;">元コメディ劇団俳優の<br>プロ指導員</div>
+  <div class="instructor-card">
+    <img src="data:image/png;base64,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
